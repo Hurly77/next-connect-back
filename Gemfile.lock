@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/faker-ruby/faker.git
+  revision: a65677484e246165735806da09a8f6e7c62f9c61
+  branch: master
+  specs:
+    faker (2.14.0)
+      i18n (>= 1.6, < 2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -60,6 +68,7 @@ GEM
       msgpack (~> 1.0)
     builder (3.2.4)
     byebug (11.1.3)
+    coderay (1.1.3)
     concurrent-ruby (1.1.7)
     crass (1.0.6)
     erubi (1.9.0)
@@ -99,11 +108,16 @@ GEM
       mini_portile2 (~> 2.4.0)
     nokogiri (1.10.10-x86-mingw32)
       mini_portile2 (~> 2.4.0)
+    pry (0.13.1)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
     puma (4.3.6)
       nio4r (~> 2.0)
     puma (4.3.6-java)
       nio4r (~> 2.0)
     rack (2.2.3)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (6.0.3.4)
@@ -172,8 +186,11 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
+  faker!
   listen (~> 3.2)
+  pry
   puma (~> 4.1)
+  rack-cors
   rails (~> 6.0.3, >= 6.0.3.4)
   spring
   spring-watcher-listen (~> 2.0.0)
