@@ -13,3 +13,10 @@ User.destroy_all
   e = first + "_" + last + "@email.com"
   User.create(first_name: first, last_name: last, email: e)
 end
+
+Post.destroy_all
+10.times do 
+  i = 1
+  Post.create(user_id: i, img: '', text: Faker::Lorem.sentence)
+i + 1
+end

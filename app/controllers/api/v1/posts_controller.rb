@@ -10,6 +10,7 @@ class Api::V1::PostsController < ApplicationController
         render json: post
       else 
         render json: {error: 'Error creating account'}
+      end
     end
   
     def show

@@ -11,6 +11,7 @@ class Api::V1::UsersController < ApplicationController
       render json: user
     else 
       render json: {error: 'Error creating account'}
+    end
   end
 
   def show
