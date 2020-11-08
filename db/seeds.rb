@@ -7,7 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 User.destroy_all
 10.times do 
-
   first = Faker::Name.first_name
   last = Faker::Name.last_name
   e = first + "_" + last + "@email.com"
@@ -15,8 +14,10 @@ User.destroy_all
 end
 
 Post.destroy_all
+i = User.first.id
 10.times do 
-  i = 1
+  3.times do
   Post.create(user_id: i, img: '', text: Faker::Lorem.sentence)
-i + 1
+  end
+  i +=1
 end
