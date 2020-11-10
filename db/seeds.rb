@@ -21,3 +21,14 @@ i = User.first.id
   end
   i +=1
 end
+
+Comment.destroy_all
+j = Post.first.id
+id = User.first.id
+10.times do
+  2.times do 
+    Comment.create(user_id: id, post_id: j, text: Faker::Lorem.sentence)
+    j += 1
+  end
+  id += 1
+end
