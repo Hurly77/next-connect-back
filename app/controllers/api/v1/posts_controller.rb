@@ -2,7 +2,8 @@ class Api::V1::PostsController < ApplicationController
   before_action :set_user
 
   def index
-    render json: @user.posts
+    post = Post.all
+    render json: PostSerializer.new(post)
   end  
   
     def create
@@ -15,8 +16,8 @@ class Api::V1::PostsController < ApplicationController
     end
   
     def show
-      @post = Post.find(params[:id])
-      render json: @post
+      post = Post.find(params[:id])
+      render json: PostSerializer.new(post)
     end
     
     def update
@@ -25,6 +26,7 @@ class Api::V1::PostsController < ApplicationController
         post.update
       else 
         render json: {error: "Only the creater can edit this post"}
+      end
     end
   
     def destroy
@@ -42,3 +44,4 @@ class Api::V1::PostsController < ApplicationController
       params.require(:post).permit(:user_id, :img, :text)
     end
 end
+
