@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
-  resources :comments
-  namespace :api do
+  namespace :api do 
     namespace :v1 do
-      resources :users do 
-        resources :posts do 
-          resources :comments
-        end
-      end
+      resources :posts
+      resources :comments
     end
   end
+  resources :sessions, only: [:create]
+    resources :registrations, only: [:create]
+    delete :logout, to:  "sessions#logout" #added route
+    get :logged_in, to: "sessions#logged_in" #added route
+    root to: "static#home"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
