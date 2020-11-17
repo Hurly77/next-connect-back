@@ -3,7 +3,7 @@ class RegistrationsController < ApplicationController
     user = User.create!(user_params)
     if user
       session[:user_id] = user.id
-      render json: {status: create, user: user}
+      render json: {status: 201, user: user, logged_in: true}
     else
       render json: { status: 500 }
     end
