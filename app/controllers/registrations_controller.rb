@@ -1,5 +1,6 @@
 class RegistrationsController < ApplicationController
   def create
+    binding.pry
     user = User.create!(user_params)
     if user
       session[:user_id] = user.id
