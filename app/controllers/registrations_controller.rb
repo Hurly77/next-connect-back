@@ -1,8 +1,8 @@
 class RegistrationsController < ApplicationController
   def create
-    binding.pry
     user = User.create!(user_params)
-    if user
+    user.connect_id = user.id
+    if user.save
       session[:user_id] = user.id
       render json: {status: 201, user: user, logged_in: true}
     else
@@ -13,7 +13,7 @@ class RegistrationsController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:first_name, :last_name, :email, :connect_id, :password, :password_confirmation)
   end
   
 end
