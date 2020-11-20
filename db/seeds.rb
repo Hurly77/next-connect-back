@@ -10,7 +10,7 @@ User.destroy_all
   first = Faker::Name.first_name
   last = Faker::Name.last_name
   e = first + "_" + last + "@email.com"
-  User.create(first_name: first, last_name: last, email: e)
+  User.create(first_name: first, last_name: last, email: e, password: '123', password_confirmation: '123')
 end
 
 Post.destroy_all
