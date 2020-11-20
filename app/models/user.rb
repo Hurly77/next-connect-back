@@ -1,6 +1,6 @@
 class User < ApplicationRecord
+  has_secure_password
   has_many :posts
   has_many :comments
-  has_secure_password
-  validates_presence_of :email
+  has_many :connections
 end
