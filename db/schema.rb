@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2020_11_21_001526) do
     t.integer "user_id"
     t.integer "connect_id"
     t.string "status"
+    t.string "avatar", default: ""
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

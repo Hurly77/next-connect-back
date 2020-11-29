@@ -1,17 +1,17 @@
 class Api::V1::PostsController < ApplicationController
-  before_action :set_user
+  include CurrentUserConcern
 
   def index
-    post = Post.all
-    render json: PostSerializer.new(post)
+    posts = Post.all
+    render json: posts.order('id DESC')
   end  
   
     def create
       post = Post.new(post_params)
-      if @user.id == params[:user_id] && post.save
+      if @current_user.id == params[:post][:user_id] && post.save
         render json: post
       else 
-        render json: {error: "Your are not #{@user.first_name}"}
+        render json: {error: "Your are not #{@current_user.first_name}"}
       end
     end
   
@@ -22,7 +22,7 @@ class Api::V1::PostsController < ApplicationController
     
     def update
       post = Post.find(params[:id])
-      if @user.id == params[:user_id]
+      if @current_user.id == params[:user_id]
         post.update
       else 
         render json: {error: "Only the creater can edit this post"}
@@ -34,10 +34,6 @@ class Api::V1::PostsController < ApplicationController
       post.destroy
     end
 
-    def set_user
-      @user = User.find_by(id: params[:user_id])
-    end
-  
     private
   
     def post_params
