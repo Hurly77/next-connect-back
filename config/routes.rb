@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :posts
       resources :comments
+      resources :search
     end
   end
   resources :sessions, only: [:create]
