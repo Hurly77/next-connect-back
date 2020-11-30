@@ -42,6 +42,12 @@ ActiveRecord::Schema.define(version: 2020_11_21_001526) do
     t.string "last_name"
     t.string "email"
     t.string "password_digest"
+    t.string "work"
+    t.string "education"
+    t.string "relationship"
+    t.string "lives"
+    t.string "from"
+    t.date "joined", default: "2020-11-28"
     t.integer "connect_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
