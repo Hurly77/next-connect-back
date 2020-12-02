@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
-  resources :freindships
-  resources :friend_requests
-  resources :friends
   namespace :api do 
     namespace :v1 do
       resources :posts
       resources :comments
       resources :search
+      resources :friendships
+      resources :users do 
+        resources :freindships
+      end
+      resources :connections 
     end
   end
   resources :sessions, only: [:create]
