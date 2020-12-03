@@ -20,11 +20,10 @@ ActiveRecord::Schema.define(version: 2020_11_21_001526) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "connections", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "connect_id"
-    t.string "status"
-    t.string "avatar", default: ""
+  create_table "friendships", force: :cascade do |t|
+    t.integer "active_user_id"
+    t.integer "passive_user_id"
+    t.string "status", default: "PENDING"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -42,13 +41,14 @@ ActiveRecord::Schema.define(version: 2020_11_21_001526) do
     t.string "last_name"
     t.string "email"
     t.string "password_digest"
+    t.string "avatar", default: "https://robohash.org/utofficiaperferendis.png?size=300x300&set=set1"
     t.string "work"
     t.string "education"
     t.string "relationship"
     t.string "lives"
     t.string "from"
-    t.date "joined", default: "2020-11-28"
-    t.integer "connect_id"
+    t.date "joined", default: "2020-12-01"
+    t.string "c_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
