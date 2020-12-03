@@ -9,8 +9,30 @@ User.destroy_all
 10.times do 
   first = Faker::Name.first_name
   last = Faker::Name.last_name
+  education = Faker::Educator.degree
+  work = Faker::Job.title
+  relationship = Faker::Name.first_name + Faker::Name.last_name
+  lives = Faker::Nation.capital_city
+  from = Faker::Nation.capital_city
+  avatar = Faker::Avatar.image
+
   e = first + "_" + last + "@email.com"
-  User.create(first_name: first, last_name: last, email: e, password: '123', password_confirmation: '123')
+  user = User.create(
+    first_name: first,
+    last_name: last,
+    email: e,
+    password: 'password',
+    password_confirmation: 'password',
+    work: work,
+    education: education,
+    relationship: relationship,
+    from: from,
+    lives: lives,
+    avatar: avatar
+  )
+  connect = first + last + user.id.to_s
+    user.c_id = connect
+    user.save
 end
 
 Post.destroy_all
