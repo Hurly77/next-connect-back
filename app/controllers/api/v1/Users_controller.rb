@@ -9,7 +9,9 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    friends = Friendship.all_friends(params[:id])
-    render json: {friends: friends, pending_friends: Friendship.friends_pending(params[:id])}
+    render json: {
+      friends: Friendship.all_friends(params[:id]),
+      pending_friends: Friendship.friends_pending(params[:id])
+    }
   end
 end
