@@ -3,7 +3,9 @@ class Friendship < ApplicationRecord
   belongs_to :passive_user, class_name: :User
 
   def self.friends_pending(a_id)
-    return Friendship.all.where("active_user_id = ? AND status = ?", a_id, "PENDING")
+   a = Friendship.all.where("active_user_id = ? AND status = ?", a_id, "PENDING")
+   pend = a.map{|fs| User.find_by(id: fs.passive_user_id)}
+   return pend
   end
 
   def self.accept_request(p_id, a_id)
