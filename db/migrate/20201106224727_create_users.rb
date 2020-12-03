@@ -5,6 +5,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :last_name
       t.string :email
       t.string :password_digest
+      t.string :avatar, default: Faker::Avatar.image
       t.string :work, null: true
       t.string :education, null: true
       t.string :relationship, null: true
@@ -12,7 +13,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :from, null: true
       t.date :joined, default: DateTime.now.to_date
 
-      t.integer :connect_id
+      t.string :c_id
       
       t.timestamps
     end
