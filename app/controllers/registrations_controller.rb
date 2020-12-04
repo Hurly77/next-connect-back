@@ -24,9 +24,10 @@ class RegistrationsController < ApplicationController
       :lives,
       :from,
       :joined,
-      :connect_id, 
+      :c_id, 
       :password, 
-      :password_confirmation)
+      :password_confirmation,
+    )
   end
   
 end
