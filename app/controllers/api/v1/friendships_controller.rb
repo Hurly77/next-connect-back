@@ -1,4 +1,11 @@
 class Api::V1::FriendshipsController < ApplicationController
+  def index
+    user = User.find_by(id: params[:user_id])
+    friends = Friendship.all_friends(user.id)
+    pending = Friendship.friends_pending(user.id)
+    render json: {user: user, friends: friends, pending: pending}
+  end
+
   def create
     if !Friendship.requested?(params[:active_user_id], params[:passive_user_id])
       friendship = Friendship.create(friends_params)
