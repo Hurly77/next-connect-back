@@ -30,8 +30,11 @@ ActiveRecord::Schema.define(version: 2020_11_21_001526) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id"
-    t.string "img"
+    t.string "users_full_name"
+    t.string "users_avatar"
+    t.string "img", default: ""
     t.string "text"
+    t.date "posted_at", default: "2020-12-03"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -41,13 +44,13 @@ ActiveRecord::Schema.define(version: 2020_11_21_001526) do
     t.string "last_name"
     t.string "email"
     t.string "password_digest"
-    t.string "avatar", default: "https://robohash.org/utofficiaperferendis.png?size=300x300&set=set1"
-    t.string "work"
-    t.string "education"
-    t.string "relationship"
-    t.string "lives"
-    t.string "from"
-    t.date "joined", default: "2020-12-01"
+    t.string "avatar", default: "https://robohash.org/eiusvelillum.png?size=300x300&set=set1"
+    t.string "work", default: ""
+    t.string "education", default: ""
+    t.string "relationship", default: ""
+    t.string "lives", default: ""
+    t.string "from", default: ""
+    t.date "joined", default: "2020-12-03"
     t.string "c_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
