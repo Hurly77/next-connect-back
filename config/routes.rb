@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       resources :search
       resources :friendships
       resources :users do 
-        resources :freindships
+        resources :friendships
       end
       resources :connections 
     end
