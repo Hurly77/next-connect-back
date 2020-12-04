@@ -6,11 +6,11 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :email
       t.string :password_digest
       t.string :avatar, default: Faker::Avatar.image
-      t.string :work, null: true
-      t.string :education, null: true
-      t.string :relationship, null: true
-      t.string :lives, null: true
-      t.string :from, null: true
+      t.string :work, default: ''
+      t.string :education, default: ''
+      t.string :relationship, default: ''
+      t.string :lives, default: ''
+      t.string :from, default: ''
       t.date :joined, default: DateTime.now.to_date
 
       t.string :c_id
