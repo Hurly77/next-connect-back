@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 User.destroy_all
 10.times do 
+  
   first = Faker::Name.first_name
   last = Faker::Name.last_name
   education = Faker::Educator.degree
@@ -37,9 +38,11 @@ end
 
 Post.destroy_all
 i = User.first.id
+user = User.find_by(id: i)
+pix = Faker::LoremPixel.image(size: "550x600")
 10.times do 
   3.times do
-  Post.create(user_id: i, img: '', text: Faker::Lorem.sentence)
+  Post.create(user_id: i, users_full_name: user.first_name + " " + user.last_name, users_avatar: user.avatar, img: pix, text: Faker::Lorem.sentence)
   end
   i +=1
 end
