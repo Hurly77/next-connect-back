@@ -27,10 +27,25 @@ class Api::V1::UsersController < ApplicationController
       )
   end
 
+  
+
   def show
+    user = User.find_by(id: params[:id])
     render json: {
       friends: Friendship.all_friends(params[:id]),
-      pending_friends: Friendship.friends_pending(params[:id])
+      pending_friends: Friendship.friends_pending(params[:id]),
+      requests: user.passive_friendships
     }
+  end
+
+  def destroy
+    friendship = Friendship.find_by(passive_user_id: params[:passive_user_id], active_user_id: params[:active_user_id])
+    friendship.destroy
+    requests = User.find_by(id: params[:id]).passive_friendships
+    render json: {
+        friends: Friendship.all_friends(params[:id]),
+        pending_friends: Friendship.friends_pending(params[:id]),
+        requests: requests
+      }
   end
 end
