@@ -19,4 +19,9 @@ class User < ApplicationRecord
   def self.query(q)
     User.where("first_name LIKE ?", "%#{q}%")
   end
+
+  def self.requests(id)
+    a = self.find_by(id: id).passive_friendships
+    return a
+  end
 end
