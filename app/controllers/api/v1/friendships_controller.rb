@@ -9,17 +9,35 @@ class Api::V1::FriendshipsController < ApplicationController
   def create
     if !Friendship.requested?(params[:active_user_id], params[:passive_user_id])
       friendship = Friendship.create(friends_params)
-      render json: pending_friends
+      render json: {
+        friends: Friendship.all_friends(params[:active_user_id]),
+        pending_friends: Friendship.friends_pending(params[:active_user_id]),
+        requests: User.requests(params[:active_user_id])
+      }
     else
-      pending = Friendship.friends_pending(params[:active_user_id]) 
-      render json: pending
+      render json: {
+        friends: Friendship.all_friends(params[:id]),
+        pending_friends: Friendship.friends_pending(params[:id]),
+        requests: User.requests(params[:active_user_id])
+      }
     end
   end
 
-  def destroy
-    friendship = Friendship.find_by(passive_user_id: params[:passive_user_id])
-    if params[:status] === "DENIED"
-      friendship.destroy_all
+
+  def update
+    if Friendship.requested?(params[:active_user_id], params[:passive_user_id])
+      friendship = Friendship.create(friends_params)
+      render json: {
+        friends: Friendship.all_friends(params[:id]),
+        pending_friends: Friendship.friends_pending(params[:id]),
+        requests: User.requests(params[:active_user_id])
+      }
+    else
+      render json: {
+        friends: Friendship.all_friends(params[:id]),
+        pending_friends: Friendship.friends_pending(params[:id]),
+        requests: user.passive_friendships
+      }
     end
   end
 
