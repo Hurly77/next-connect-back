@@ -6,8 +6,10 @@ Rails.application.routes.draw do
       resources :search
       resources :friendships
       resources :users do 
-        resources :friendships
+        resources :friendships 
       end
+    post :friend_request, to: 'friendship#friend_request'
+    post :accept, to: 'friendship#accept'
     end
   end
   resources :sessions, only: [:create]
