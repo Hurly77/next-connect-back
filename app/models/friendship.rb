@@ -19,7 +19,7 @@ class Friendship < ApplicationRecord
   end
 
   def self.all_friends(a_id)
-    return Friendship.all.where("active_user_id = ? AND status = ?", a_id, "FRIENDS")
+    return Friendship.all.where("active_user_id = ? AND status = ?", a_id, "ACCEPTED")
   end
 
   def self.friends?(a_id, p_id)
@@ -31,7 +31,7 @@ class Friendship < ApplicationRecord
   def self.requested?(a_id, p_id)
     fs_a = Friendship.all.where("active_user_id = ? AND passive_user_id = ?", a_id, p_id)
     fs_p = Friendship.all.where("active_user_id = ? AND passive_user_id = ?", p_id, a_id)
-    return fs_a.length > 0 || fs_p.length > 0 ? true : false
+    return fs_a[0] && !fs_p[0] ? true : false
   end
 
   def self.check_status(a_id, p_id)
