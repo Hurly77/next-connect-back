@@ -6,7 +6,8 @@ class Api::V1::FriendshipsController < ApplicationController
     render json: {user: user, friends: friends, pending: pending}
   end
 
-  def create
+
+  def friend_request 
     if !Friendship.requested?(params[:active_user_id], params[:passive_user_id])
       friendship = Friendship.create(friends_params)
       render json: {
@@ -21,6 +22,14 @@ class Api::V1::FriendshipsController < ApplicationController
         requests: User.requests(params[:active_user_id])
       }
     end
+  end
+
+  def accept
+    if Friendship.requested?(params[:passive_user_id], params[:active_user_id])
+  end
+
+  def create
+   
   end
 
 
