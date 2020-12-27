@@ -34,7 +34,7 @@ class Api::V1::UsersController < ApplicationController
     render json: {
       friends: Friendship.all_friends(params[:id]),
       pending_friends: Friendship.friends_pending(params[:id]),
-      requests: user.passive_friendships
+      requests: User.requests(user.id)
     }
   end
 
