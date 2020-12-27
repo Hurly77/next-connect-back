@@ -21,7 +21,9 @@ class User < ApplicationRecord
   end
 
   def self.requests(id)
-    a = self.find_by(id: id).passive_friendships
-    return a
+    requests = self.find_by(id: id).passive_friendships
+    r_list = requests.map{|r| r.active_user_id }
+    req_for_user = r_list.map{|id| self.find_by(id: id)}
+    return req_for_user
   end
 end
