@@ -1,13 +1,10 @@
 class Api::V1::UsersController < ApplicationController
-  include CurrentUserConcern
-
-
   def index
     users = User.query(params[:query])
     if users
     render json: {tree: users}
     else 
-      render json: {status: 'not success'}
+    render json: {status: 'not success'}
     end
   end
 
@@ -23,29 +20,23 @@ class Api::V1::UsersController < ApplicationController
         relationship: params[:user][:relationship],
         lives: params[:user][:lives],
         from: params[:user][:from],
-        joined: params[:user][:joined],
       )
+      user.save
   end
-
-  
 
   def show
     user = User.find_by(id: params[:id])
     render json: {
-      friends: Friendship.all_friends(params[:id]),
-      pending_friends: Friendship.friends_pending(params[:id]),
-      requests: User.requests(user.id)
+      friends: user.friends,
+      pending_friends: user.pending_friends,
+      requests: user.requests
     }
   end
 
   def destroy
-    friendship = Friendship.find_by(passive_user_id: params[:passive_user_id], active_user_id: params[:active_user_id])
+    user = User.find_by(id: params[:active_user_id])
+    friendship = Friendship.find_by(active_user_id: params[:passive_user_id], passive_user_id: params[:active_user_id])
     friendship.destroy
-    requests = User.find_by(id: params[:id]).passive_friendships
-    render json: {
-        friends: Friendship.all_friends(params[:id]),
-        pending_friends: Friendship.friends_pending(params[:id]),
-        requests: requests
-      }
+    render json: {pending_friends: user.pending_friends}
   end
 end
