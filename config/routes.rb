@@ -8,8 +8,8 @@ Rails.application.routes.draw do
       resources :users do 
         resources :friendships 
       end
-    post :friend_request, to: 'friendship#friend_request'
-    post :accept, to: 'friendship#accept'
+    post :friend_request, to: 'friendships#friend_request'
+    post :accept, to: 'friendships#accept'
     end
   end
   resources :sessions, only: [:create]
