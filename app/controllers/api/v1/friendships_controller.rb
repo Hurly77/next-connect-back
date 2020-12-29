@@ -1,52 +1,23 @@
 class Api::V1::FriendshipsController < ApplicationController
-  def index
-    user = User.find_by(id: params[:user_id])
-    friends = Friendship.all_friends(user.id)
-    pending = Friendship.friends_pending(user.id)
-    render json: {user: user, friends: friends, pending: pending}
-  end
-
 
   def friend_request 
+    user = User.find_by(params[:active_user_id])
     if !Friendship.requested?(params[:active_user_id], params[:passive_user_id])
-      friendship = Friendship.create(friends_params)
-      render json: {
-        friends: Friendship.all_friends(params[:active_user_id]),
-        pending_friends: Friendship.friends_pending(params[:active_user_id]),
-        requests: User.requests(params[:active_user_id])
-      }
+      Friendship.find_or_create_by(friends_params)
+      render json: {pending_friends: user.pending_friends}
     else
-      render json: {
-        friends: Friendship.all_friends(params[:id]),
-        pending_friends: Friendship.friends_pending(params[:id]),
-        requests: User.requests(params[:active_user_id])
-      }
+      render json: {pending_friends: user.pending_friends}
     end
   end
 
   def accept
-    if Friendship.requested?(params[:passive_user_id], params[:active_user_id])
-  end
-
-  def create
-   
-  end
-
-
-  def update
+    user = User.find_by(id: params[:active_user_id])
+    binding.pry
     if Friendship.requested?(params[:active_user_id], params[:passive_user_id])
-      friendship = Friendship.create(friends_params)
-      render json: {
-        friends: Friendship.all_friends(params[:id]),
-        pending_friends: Friendship.friends_pending(params[:id]),
-        requests: User.requests(params[:active_user_id])
-      }
-    else
-      render json: {
-        friends: Friendship.all_friends(params[:id]),
-        pending_friends: Friendship.friends_pending(params[:id]),
-        requests: user.passive_friendships
-      }
+       Friendship.accept_request(params[:active_user_id], params[:passive_user_id])
+      render json: {friends: user.friends} 
+    else 
+      render json: {friends: user.friends}
     end
   end
 
