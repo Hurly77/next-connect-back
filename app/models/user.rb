@@ -38,4 +38,15 @@ class User < ApplicationRecord
     f_list = friends.map{|f| f.status === "FRIENDS" ? User.find_by(id: f.passive_user_id) : []}.flatten
     return f_list
   end
+
+  def friend_posts
+    self.friends.map{|friend| Post.all.where("user_id = ?", friend.id).order("id DESC")}.flatten
+  end
+
+  def all_posts
+    user_posts = self.posts.clone
+    friend_posts = self.friend_posts.clone
+    all_posts = friend_posts.concat(user_posts)
+    return all_posts
+  end
 end
