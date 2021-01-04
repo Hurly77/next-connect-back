@@ -2,6 +2,8 @@ class User < ApplicationRecord
   has_secure_password
   has_many :posts
   has_many :comments
+  has_one_attached :img
+
 
   has_many :active_friendships,
            foreign_key: :active_user_id,
