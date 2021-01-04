@@ -9,20 +9,14 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
-      user = User.find_by(id: params[:user][:id])
-      user.update(
-        first_name: params[:user][:first_name], 
-        last_name: params[:user][:last_name], 
-        email: params[:user][:email], 
-        avatar: params[:user][:avatar], 
-        work: params[:user][:work],
-        education: params[:user][:education],
-        relationship: params[:user][:relationship],
-        lives: params[:user][:lives],
-        from: params[:user][:from],
-      )
+    user = User.find_by(id: params[:user][:id])
+    if user.update_attributes(user_params)
       user.save
-  end
+      render json: {user: user}
+    else 
+      render json: {message: "no user exists"}
+    end
+end
 
   def show
     user = User.find_by(id: params[:id])
@@ -35,8 +29,36 @@ class Api::V1::UsersController < ApplicationController
 
   def destroy
     user = User.find_by(id: params[:active_user_id])
-    friendship = Friendship.find_by(active_user_id: params[:passive_user_id], passive_user_id: params[:active_user_id])
+    friendship = Friendship.find_by(active_user_id: params[:active_user_id], passive_user_id: params[:passive_user_id])
     friendship.destroy
     render json: {pending_friends: user.pending_friends}
+  end
+
+
+  def user
+    if session[:user_id] 
+      @current_user = User.find_by(id: [:user_id])
+    end
+  end
+
+  private
+  def user_params
+    params.require(:user).permit(
+      :id,
+      :first_name, 
+      :last_name, 
+      :email, 
+      :avatar, 
+      :work,
+      :education,
+      :relationship,
+      :lives,
+      :from,
+      :joined,
+      :c_id,
+      :created_at,
+      :updated_at,
+      :password_digest,
+    )
   end
 end
