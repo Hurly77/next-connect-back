@@ -38,9 +38,9 @@ end
 
 Post.destroy_all
 i = User.first.id
-user = User.find_by(id: i)
-pix = Faker::LoremPixel.image(size: "550x600")
 10.times do 
+  user = User.find_by(id: i)
+  pix = Faker::LoremPixel.image(size: "550x600")
   3.times do
   Post.create(user_id: i, users_full_name: user.first_name + " " + user.last_name, users_avatar: user.avatar, img: pix, text: Faker::Lorem.sentence)
   end
