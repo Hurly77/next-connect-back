@@ -2,8 +2,18 @@ class Api::V1::PostsController < ApplicationController
   include CurrentUserConcern
 
   def index
-    posts = Post.all
-    render json: posts.order("id DESC")
+    user = User.find_by(id: params[:id])
+    render json: user.posts
+  end
+
+  def friends
+    user = User.find_by(id: params[:user_id])
+    render json: user.friend_posts
+  end
+
+  def all_posts
+    user = User.find_by(id: params[:user_id])
+    render json: user.all_posts.sort.reverse
   end
 
   def create
@@ -13,11 +23,6 @@ class Api::V1::PostsController < ApplicationController
     else
       render json: { error: "Your are not #{@current_user.first_name}" }
     end
-  end
-
-  def show
-    post = Post.find(params[:id])
-    render json: post
   end
 
   def update
@@ -37,6 +42,6 @@ class Api::V1::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:user_id, :img, :text)
+    params.require(:post).permit(:user_id, :users_full_name, :users_avatar, :img, :text)
   end
 end
