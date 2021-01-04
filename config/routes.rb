@@ -5,8 +5,12 @@ Rails.application.routes.draw do
       resources :comments
       resources :search
       resources :friendships
+      resources :users
       resources :users do 
-        resources :friendships 
+        resources :friendships
+        get :friends, to: "posts#friends"
+        get :all_posts, to: "posts#all_posts"
+        resources :posts
       end
     post :friend_request, to: 'friendships#friend_request'
     post :accept, to: 'friendships#accept'
