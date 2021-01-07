@@ -45,10 +45,10 @@ end
   def user_params
     params.require(:user).permit(
       :id,
+      :photo_url,
       :first_name, 
       :last_name, 
       :email, 
-      :avatar, 
       :work,
       :education,
       :relationship,
@@ -59,6 +59,7 @@ end
       :created_at,
       :updated_at,
       :password_digest,
+      :avatar, 
     )
   end
 end
