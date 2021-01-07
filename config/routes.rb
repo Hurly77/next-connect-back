@@ -6,6 +6,10 @@ Rails.application.routes.draw do
       resources :search
       resources :friendships
       resources :users
+      resources :photos
+      resources :photos do 
+        resource :users
+      end
       resources :users do 
         resources :friendships
         get :friends, to: "posts#friends"
