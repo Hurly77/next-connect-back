@@ -15,10 +15,11 @@ User.destroy_all
   relationship = Faker::Name.first_name + Faker::Name.last_name
   lives = Faker::Nation.capital_city
   from = Faker::Nation.capital_city
-  avatar = Faker::Avatar.image
+  photo_url = Faker::Avatar.image
 
   e = first + "_" + last + "@email.com"
   user = User.create(
+    photo_url: photo_url,
     first_name: first,
     last_name: last,
     email: e,
@@ -29,7 +30,6 @@ User.destroy_all
     relationship: relationship,
     from: from,
     lives: lives,
-    avatar: avatar
   )
   connect = first + last + user.id.to_s
     user.c_id = connect
@@ -42,7 +42,7 @@ i = User.first.id
   user = User.find_by(id: i)
   pix = Faker::LoremPixel.image(size: "550x600")
   3.times do
-  Post.create(user_id: i, users_full_name: user.first_name + " " + user.last_name, users_avatar: user.avatar, img: pix, text: Faker::Lorem.sentence)
+  Post.create(user_id: i, users_full_name: user.first_name + " " + user.last_name, users_avatar: user.photo_url, img: pix, text: Faker::Lorem.sentence)
   end
   i +=1
 end
