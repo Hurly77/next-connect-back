@@ -55,24 +55,24 @@ ActiveRecord::Schema.define(version: 2021_01_04_005756) do
     t.string "users_avatar"
     t.string "img", default: ""
     t.string "text"
-    t.date "posted_at", default: "2020-12-29"
+    t.date "posted_at", default: "2021-01-06"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "photo_url"
     t.string "first_name"
     t.string "last_name"
     t.string "email"
     t.string "password_digest"
-    t.string "avatar", default: "https://robohash.org/cupiditatecommodidolor.png?size=300x300&set=set1"
     t.string "work", default: ""
     t.string "education", default: ""
     t.string "relationship", default: ""
     t.string "lives", default: ""
     t.string "from", default: ""
-    t.date "joined", default: "2020-12-29"
     t.string "c_id"
+    t.date "joined", default: "2021-01-06"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
