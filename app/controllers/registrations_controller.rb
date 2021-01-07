@@ -16,7 +16,6 @@ class RegistrationsController < ApplicationController
       :first_name, 
       :last_name, 
       :email, 
-      :avatar, 
       :work,
       :education,
       :relationship,
@@ -26,6 +25,7 @@ class RegistrationsController < ApplicationController
       :c_id, 
       :password, 
       :password_confirmation,
+      :avatar,
     )
   end
   
