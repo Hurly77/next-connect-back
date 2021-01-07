@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_secure_password
   has_many :posts
   has_many :comments
-  has_one_attached :img
+  has_one_attached :avatar
 
 
   has_many :active_friendships,
@@ -50,5 +50,9 @@ class User < ApplicationRecord
     friend_posts = self.friend_posts.clone
     all_posts = friend_posts.concat(user_posts)
     return all_posts
+  end
+
+  def update_avatar(url)
+    Post.where("user_id = ?", self.id).update_all(users_avatar: url)
   end
 end
