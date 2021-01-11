@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_04_005756) do
+ActiveRecord::Schema.define(version: 2021_01_10_005819) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -49,19 +49,26 @@ ActiveRecord::Schema.define(version: 2021_01_04_005756) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "post_photos", force: :cascade do |t|
+    t.string "url"
+    t.integer "post_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.integer "user_id"
     t.string "users_full_name"
     t.string "users_avatar"
-    t.string "img", default: ""
     t.string "text"
-    t.date "posted_at", default: "2021-01-06"
+    t.date "posted_at", default: "2021-01-09"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
     t.string "photo_url"
+    t.string "banner_url"
     t.string "first_name"
     t.string "last_name"
     t.string "email"
@@ -72,7 +79,7 @@ ActiveRecord::Schema.define(version: 2021_01_04_005756) do
     t.string "lives", default: ""
     t.string "from", default: ""
     t.string "c_id"
-    t.date "joined", default: "2021-01-06"
+    t.date "joined", default: "2021-01-09"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
