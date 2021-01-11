@@ -19,7 +19,12 @@ class Api::V1::PostsController < ApplicationController
   def create
     post = Post.new(post_params)
     if @current_user.id == params[:post][:user_id] && post.save
-      render json: post
+      post.photos.attach(params[:post][:photos])
+      photos = post.post_urls(post.photos)
+      render json: {post: {
+        post: post,
+        photos: photos
+      }}
     else
       render json: { error: "Your are not #{@current_user.first_name}" }
     end
@@ -42,6 +47,6 @@ class Api::V1::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:user_id, :users_full_name, :users_avatar, :img, :text)
+    params.require(:post).permit(:user_id, :users_full_name, :users_avatar, :text, photos: [])
   end
 end
