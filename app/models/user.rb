@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :posts
   has_many :comments
   has_one_attached :avatar
+  has_one_attached :banner
 
 
   has_many :active_friendships,
@@ -20,6 +21,11 @@ class User < ApplicationRecord
 
   def self.query(q)
     User.where("first_name LIKE ?", "%#{q}%")
+  end
+
+  def self.find_user_by_c_id(id)
+    user = User.where("c_id LIKE ?", id).limit(1)
+    return user
   end
 
   def pending_friends
