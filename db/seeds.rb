@@ -42,7 +42,8 @@ i = User.first.id
   user = User.find_by(id: i)
   pix = Faker::LoremPixel.image(size: "550x600")
   3.times do
-  Post.create(user_id: i, users_full_name: user.first_name + " " + user.last_name, users_avatar: user.photo_url, img: pix, text: Faker::Lorem.sentence)
+  Post.create(user_id: i, users_full_name: user.first_name + " " + user.last_name, users_avatar: user.photo_url, text: Faker::Lorem.sentence)
+  PostPhoto.create(url: pix, post_id: i)
   end
   i +=1
 end
