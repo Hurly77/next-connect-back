@@ -41,11 +41,18 @@ end
     end
   end
 
+  def existing_user
+    if find = User.find_user_by_c_id(params[:c_id])
+      render json: find
+    end
+  end
+
   private
   def user_params
     params.require(:user).permit(
       :id,
       :photo_url,
+      :banner_url,
       :first_name, 
       :last_name, 
       :email, 
