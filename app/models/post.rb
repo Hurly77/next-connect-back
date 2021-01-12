@@ -5,6 +5,11 @@ class Post < ApplicationRecord
   has_many_attached :photos
 
 
+  def make_photos(photos)
+        
+  end
+
+
   def post_urls(photos)
     photos_array = []
     return photos.map do |photo| 
