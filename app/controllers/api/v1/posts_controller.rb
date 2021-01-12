@@ -17,6 +17,7 @@ class Api::V1::PostsController < ApplicationController
   end
 
   def create
+    binding.pry
     post = Post.new(post_params)
     if @current_user.id == params[:post][:user_id] && post.save
       post.photos.attach(params[:post][:photos])
@@ -47,6 +48,6 @@ class Api::V1::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:user_id, :users_full_name, :users_avatar, :text, photos: [])
+    params.require(:post).permit!
   end
 end
