@@ -3,7 +3,7 @@ class Api::V1::PostsController < ApplicationController
 
   def index
     user = User.find_by(id: params[:id])
-    render json: user.posts
+    render json: user.user_posts
   end
 
   def friends
@@ -13,21 +13,15 @@ class Api::V1::PostsController < ApplicationController
 
   def all_posts
     user = User.find_by(id: params[:user_id])
-    render json: user.all_posts.sort.reverse
+    render json: user.all_posts
   end
 
   def create
-    binding.pry
     post = Post.new(post_params)
-    if @current_user.id == params[:post][:user_id] && post.save
-      post.photos.attach(params[:post][:photos])
-      photos = post.post_urls(post.photos)
-      render json: {post: {
-        post: post,
-        photos: photos
-      }}
+    if post.save 
+      render json: {post: post}
     else
-      render json: { error: "Your are not #{@current_user.first_name}" }
+      render json: {message: "Something went wrong"}
     end
   end
 
@@ -46,8 +40,8 @@ class Api::V1::PostsController < ApplicationController
   end
 
   private
-
   def post_params
     params.require(:post).permit!
   end
+ 
 end
