@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :post_photos
   namespace :api do 
     namespace :v1 do
       resources :posts
@@ -7,6 +6,7 @@ Rails.application.routes.draw do
       resources :search
       resources :friendships
       resources :photos
+      resources :post_photos
       resources :photos do 
         resource :users
       end
