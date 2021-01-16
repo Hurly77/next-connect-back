@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :posts
+  has_many :post_photos
   has_many :comments
   has_one_attached :avatar
   has_one_attached :banner
@@ -51,14 +52,40 @@ class User < ApplicationRecord
     self.friends.map{|friend| Post.all.where("user_id = ?", friend.id).order("id DESC")}.flatten
   end
 
+  def photo_array(id)
+    return PostPhoto.where("post_id = ?", id).pluck(:url)
+  end
+
+  def user_posts
+    my_posts = self.posts.reverse.map do |p|
+      obj = {
+        post: p,
+        photos: photo_array(p.id)
+      }
+    end
+    return my_posts
+  end
+
   def all_posts
     user_posts = self.posts.clone
     friend_posts = self.friend_posts.clone
     all_posts = friend_posts.concat(user_posts)
-    return all_posts
+    my_posts = all_posts.reverse.map do |p|
+      obj = {
+        post: p,
+        photos: photo_array(p.id)
+      }
+    end
+
+    return my_posts
+  end
+
+  def photos
+    self.post_photos.pluck(:url)
   end
 
   def update_avatar(url)
+    binding.pry
     Post.where("user_id = ?", self.id).update_all(users_avatar: url)
   end
 end
