@@ -73,7 +73,8 @@ class User < ApplicationRecord
     my_posts = all_posts.reverse.map do |p|
       obj = {
         post: p,
-        photos: photo_array(p.id)
+        photos: photo_array(p.id),
+        comments: p.comments
       }
     end
 
@@ -85,7 +86,6 @@ class User < ApplicationRecord
   end
 
   def update_avatar(url)
-    binding.pry
     Post.where("user_id = ?", self.id).update_all(users_avatar: url)
   end
 end
