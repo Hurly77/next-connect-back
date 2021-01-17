@@ -1,12 +1,12 @@
 class Api::V1::CommentsController < ApplicationController
-  before_action :set_user
-
-  def index
-    comments = @post.comments
-    render json: comments
+  def create
+    comment = Comment.create(comment_params)
+    
   end
 
-  def set_user
-    @post = Post.find(params[:post_id])
+  private 
+  
+  def comment_params
+    params.require(comment).permit!
   end
 end
