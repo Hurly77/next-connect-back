@@ -35,6 +35,9 @@ ActiveRecord::Schema.define(version: 2021_01_10_005819) do
 
   create_table "comments", force: :cascade do |t|
     t.string "text"
+    t.string "users_avatar"
+    t.string "users_full_name"
+    t.date "posted_at", default: "2021-01-16"
     t.integer "user_id"
     t.integer "post_id"
     t.datetime "created_at", precision: 6, null: false
@@ -62,7 +65,7 @@ ActiveRecord::Schema.define(version: 2021_01_10_005819) do
     t.string "users_full_name"
     t.string "users_avatar"
     t.string "text"
-    t.date "posted_at", default: "2021-01-14"
+    t.date "posted_at", default: "2021-01-16"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -80,7 +83,7 @@ ActiveRecord::Schema.define(version: 2021_01_10_005819) do
     t.string "lives", default: ""
     t.string "from", default: ""
     t.string "c_id"
-    t.date "joined", default: "2021-01-14"
+    t.date "joined", default: "2021-01-16"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
