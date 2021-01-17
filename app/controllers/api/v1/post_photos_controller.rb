@@ -20,7 +20,7 @@ class Api::V1::PostPhotosController < ApplicationController
       new_photo.update(url: url)
       new_photo.save
     end
-    render json: user.all_posts
+    render json: {posts: user.all_posts}
   end
   end
 
