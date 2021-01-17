@@ -51,10 +51,30 @@ end
 Comment.destroy_all
 j = Post.first.id
 id = User.first.id
+
 10.times do
+  user = User.find_by(id: id)
   2.times do 
-    Comment.create(user_id: id, post_id: j, text: Faker::Lorem.sentence)
-    j += 1
+    Comment.create(
+      user_id: id, 
+      post_id: j, 
+      text: Faker::Lorem.sentence, 
+      users_full_name: user.first_name + " " + user.last_name,
+      users_avatar: user.photo_url
+    )
   end
+  j += 1
   id += 1
+end
+
+User.create(
+  first_name: "Jason", 
+  last_name: "Borne", 
+  email: 'jason.borne@secretagent.com', 
+  c_id: "JasonBorne11"
+  password: "password", password_confirmation: "password")
+f_id = User.first.id
+10.times do
+  Friendship.create(active_user_id: f_id, passive_user_id: 11)
+  f_id += 1
 end
