@@ -7,7 +7,7 @@ class Api::V1::PhotosController < ApplicationController
       photo = url_for(@user.avatar)
     if @user.update(photo_url: photo)
       @user.update_avatar(photo)
-      render json: @user 
+      render json: @user.info
     end
   end
 
