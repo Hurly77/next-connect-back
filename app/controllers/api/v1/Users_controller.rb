@@ -12,7 +12,7 @@ class Api::V1::UsersController < ApplicationController
     user = User.find_by(id: params[:user][:id])
     if user.update_attributes(user_params)
       user.save
-      render json: {user: user}
+      render json: {user: user.info}
     else 
       render json: {message: "no user exists"}
     end
