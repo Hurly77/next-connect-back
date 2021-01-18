@@ -21,7 +21,11 @@ class User < ApplicationRecord
   has_many :passive_friends, through: :passive_friendships, source: :passive_user
 
   def self.query(q)
-    User.where("first_name LIKE ?", "%#{q}%")
+    users = User.where("first_name LIKE ?", "%#{q}%")
+    users = users.map do |user|
+      user.attributes().except("password_digest", "created_at", "updated_at")
+    end
+    return users
   end
 
   def self.find_user_by_c_id(id)
@@ -60,7 +64,8 @@ class User < ApplicationRecord
     my_posts = self.posts.reverse.map do |p|
       obj = {
         post: p,
-        photos: photo_array(p.id)
+        photos: photo_array(p.id),
+        comments: []
       }
     end
     return my_posts
@@ -74,7 +79,7 @@ class User < ApplicationRecord
       obj = {
         post: p,
         photos: photo_array(p.id),
-        comments: p.comments
+        comments: p.comments.reverse
       }
     end
 
@@ -87,5 +92,9 @@ class User < ApplicationRecord
 
   def update_avatar(url)
     Post.where("user_id = ?", self.id).update_all(users_avatar: url)
+  end
+
+  def info
+    self.attributes.except("password_digest", "created_at", "updated_at")
   end
 end
