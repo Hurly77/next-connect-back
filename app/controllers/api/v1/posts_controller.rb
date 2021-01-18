@@ -3,7 +3,7 @@ class Api::V1::PostsController < ApplicationController
 
   def index
     user = User.find_by(id: params[:id])
-    render json: user.posts
+    render json: user.user_posts
   end
 
   def friends
