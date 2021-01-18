@@ -4,7 +4,7 @@ class RegistrationsController < ApplicationController
     user.c_id = user.first_name + user.last_name + user.id.to_s
     if user.save
       session[:user_id] = user.id
-      render json: {status: 201, user: user, logged_in: true}
+      render json: {status: 201, user: user.info, logged_in: true}
     else
       render json: { status: 500 }
     end
