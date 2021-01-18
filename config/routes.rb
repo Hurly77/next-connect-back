@@ -17,6 +17,9 @@ Rails.application.routes.draw do
         get :existing_user, to: "users#existing_user"
         resources :posts
       end
+    resources :posts do
+      resources :comments
+    end
     post :friend_request, to: 'friendships#friend_request'
     post :accept, to: 'friendships#accept'
     end
