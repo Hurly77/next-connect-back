@@ -50,6 +50,7 @@ end
 
 Comment.destroy_all
 j = Post.first.id
+
 id = User.first.id
 
 10.times do
@@ -67,12 +68,8 @@ id = User.first.id
   id += 1
 end
 
-User.create(
-  first_name: "Jason", 
-  last_name: "Borne", 
-  email: 'jason.borne@secretagent.com', 
-  c_id: "JasonBorne11"
-  password: "password", password_confirmation: "password")
+
+User.create(first_name: "Jason", last_name: "Borne", email: 'jason.borne@secretagent.com', c_id: "JasonBorne11", password: "password", password_confirmation: "password")
 f_id = User.first.id
 10.times do
   Friendship.create(active_user_id: f_id, passive_user_id: 11)
