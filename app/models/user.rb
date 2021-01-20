@@ -98,4 +98,5 @@ class User < ApplicationRecord
   def info
     self.attributes.except("password_digest", "created_at", "updated_at")
   end
+
 end
