@@ -22,6 +22,7 @@ gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'mast
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 gem 'rufo'
+gem "aws-sdk-s3", require: false
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

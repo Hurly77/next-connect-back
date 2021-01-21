@@ -4,8 +4,8 @@ class User < ApplicationRecord
   has_many :post_photos
   has_many :comments
   has_many :likes
-  has_one_attached :avatar
-  has_one_attached :banner
+  has_one_attached :avatar, dependent: :destroy
+  has_one_attached :banner, dependent: :destroy
 
 
   has_many :active_friendships,
