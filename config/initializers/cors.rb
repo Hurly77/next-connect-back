@@ -7,7 +7,11 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
+<<<<<<< HEAD
     origins 'https://next-connect-back.herokuapp.com'
+=======
+    origins 'https://next-connect-back.herokuapp.com/'
+>>>>>>> 203fb4cd9c368159db9d152d6b418e3ca9106e06
 
     resource '*',
       headers: :any,
